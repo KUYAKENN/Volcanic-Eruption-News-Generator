@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Volcanic Eruption News Generator</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+  <h1>Volcanic Eruption News Generator</h1>
+  <form id="eruption-form">
+    <label for="volcano-name">Volcano Name:</label>
+    <input type="text" id="volcano-name" name="volcano-name" required>
+    
+    <label for="location">Location:</label>
+    <input type="text" id="location" name="location" required>
+    
+    <label for="date">Date:</label>
+    <input type="date" id="date" name="date" required>
+    
+    <label for="description">Description:</label>
+    <textarea id="description" name="description" required></textarea>
+    
+    <button type="submit">Generate News Article</button>
+  </form>
+  
+  <div id="generated-article"></div>
+  
+  <script src="script.js"></script>
+</body>
+</html>
