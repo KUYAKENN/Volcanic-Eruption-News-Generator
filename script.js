@@ -1,11 +1,12 @@
 document.getElementById('eruption-form').addEventListener('submit', function(e) {
   e.preventDefault();
-  
+  //nag define ako ng cons na sya kukuha ng words from interface ppasok dito sa back
   const volcanoName = document.getElementById('volcano-name').value;
   const location = document.getElementById('location').value;
   const date = document.getElementById('date').value;
   const description = document.getElementById('description').value;
   
+  //nag define dito ng data which magiging limitation papasok sa api na AI kung baga ito yung maga bigay ng limit nyo if ano yung gusto nyo ma output
   const data = {
     "contents": [
       {
@@ -18,23 +19,23 @@ document.getElementById('eruption-form').addEventListener('submit', function(e) 
     ]
   };
   
-  const apiUrl = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent';
-  const apiKey = 'AIzaSyDcAhnT84DLBlxuWIFhWvath4DqsUAzI9E';
+  const apiUrl = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent'; //api keys to wag nyo ibigay kanino kasi account ko to huhu
+  const apiKey = 'AIzaSyDcAhnT84DLBlxuWIFhWvath4DqsUAzI9E'; //ito reason bakit nakaka connect sa api ni gemini ai
   
   fetch(apiUrl + '?key=' + apiKey, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify(data)
-  })
+    body: JSON.stringify(data) //dito pinapasok yung mga data na tig input tas ibibigay papunta kay ai na naka json
+  }) 
   .then(response => {
     if (!response.ok) {
-      throw new Error('API request failed');
+      throw new Error('API request failed'); //if nag ka error example pag nag generate ka ito lumabas meaning may error sa pag fetch ng data
     }
     return response.json();
   })
-  .then(result => {
+  .then(result => { //ito na yung output pumasok sa for loop para mabigyan sya ng structure tulad sa alignment ng articles
     console.log(result); // Log the entire result to understand its structure
     if (result && result.candidates && result.candidates.length > 0) {
       const candidate = result.candidates[0];
