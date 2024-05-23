@@ -1,28 +1,82 @@
 body {
-  font-family: Arial, sans-serif;
-  margin: 20px;
+  font-family: 'Arial', sans-serif;
+  background-color: #f9f9f9;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 h1 {
   text-align: center;
+  margin-top: 40px;
+  color: #333;
+  font-size: 2em;
 }
 
 form {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   max-width: 500px;
-  margin: 0 auto;
+  margin: 20px;
+  padding: 20px;
+  width: 100%;
 }
 
 label, input, textarea {
   display: block;
-  margin-bottom: 10px;
+  width: calc(100% - 20px);
+  margin: 10px auto;
+  padding: 10px;
+  font-size: 1em;
+}
+
+input, textarea {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 1em;
+  background-color: #f9f9f9;
 }
 
 button {
-  margin-top: 10px;
+  display: block;
+  width: calc(100% - 20px);
+  margin: 20px auto;
+  padding: 10px;
+  font-size: 1em;
+  color: #fff;
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #45a049;
 }
 
 #generated-article {
-  margin-top: 20px;
-  border: 1px solid #ccc;
-  padding: 10px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: 20px;
+  padding: 20px;
+  width: 100%;
+  line-height: 1.6;
+}
+
+@media (max-width: 600px) {
+  form, #generated-article {
+    max-width: 90%;
+    margin: 10px;
+  }
+
+  input, textarea, button {
+    width: calc(100% - 20px);
+  }
 }

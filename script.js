@@ -11,7 +11,7 @@ document.getElementById('eruption-form').addEventListener('submit', function(e) 
       {
         "parts": [
           {
-            "text": `Generate a news article about a volcanic eruption with the following details:\nVolcano Name: ${volcanoName}\nLocation: ${location}\nDate: ${date}\nDescription: ${description}`
+            "text": `Generate an article about a volcanic eruption with the following details:\nVolcano Name: ${volcanoName}\nLocation: ${location}\nDate: ${date}\nDescription: ${description}\n\nPlease generate a well-structured article in paragraph form only, without asterisks, and with proper punctuation and grammar. The output should have the following structure:\n\n[Title]\n[Location and Date]\n\n[Article] Ensure that no asterisks are used in the article. make it atleast 400 up words`
           }
         ]
       }
@@ -50,7 +50,19 @@ document.getElementById('eruption-form').addEventListener('submit', function(e) 
 
         // Check for text in the nested parts array
         if (candidate.content.parts && candidate.content.parts[0] && candidate.content.parts[0].text) {
-          const generatedArticle = candidate.content.parts[0].text;
+          let articleContent = candidate.content.parts[0].text;
+
+          // Remove asterisks from the article content
+          articleContent = articleContent.replace(/\*\*/g, '');
+
+          // Remove title and location/date part if present
+          articleContent = articleContent.replace(/^\s*[\w\s,]+-\s*/, '');
+
+          // Create the formatted output without title and location/date
+          const generatedArticle = `
+            ${articleContent}
+          `;
+
           document.getElementById('generated-article').innerHTML = generatedArticle;
         } else {
           throw new Error('Unexpected content structure');
