@@ -1,41 +1,47 @@
 document.getElementById('eruption-form').addEventListener('submit', function(e) {
   e.preventDefault();
-  //nag define ako ng cons na sya kukuha ng words from interface ppasok dito sa back
-  const volcanoName = document.getElementById('volcano-name').value;
-  const location = document.getElementById('location').value;
-  const date = document.getElementById('date').value;
-  const description = document.getElementById('description').value;
   
-  //nag define dito ng data which magiging limitation papasok sa api na AI kung baga ito yung maga bigay ng limit nyo if ano yung gusto nyo ma output
+  const dateIssued = document.getElementById('date-issued').value;
+  const timeIssued = document.getElementById('time-issued').value;
+  const volcanoName = document.getElementById('volcano-name').value;
+  const avgSulfurDioxide = document.getElementById('avg-sulfur-dioxide').value;
+  const dateEmissionMeasure = document.getElementById('date-emission-measure').value;
+  const volcanicEarthquakes = document.getElementById('volcanic-earthquakes').value;
+  const steamActivity = document.getElementById('steam-activity').value;
+  const alertLevel = document.getElementById('alert-level').value;
+  const otherActivities = document.getElementById('other-activities').value;
+  const recommendedActions = document.getElementById('recommended-actions').value;
+  const source = document.getElementById('source').value;
+  
   const data = {
     "contents": [
       {
         "parts": [
           {
-            "text": `Generate an article about a volcanic eruption with the following details:\nVolcano Name: ${volcanoName}\nLocation: ${location}\nDate: ${date}\nDescription: ${description}\n\nPlease generate a well-structured article in paragraph form only, without asterisks, and with proper punctuation and grammar. The output should have the following structure:\n\n[Title]\n[Location and Date]\n\n[Article] Ensure that no asterisks are used in the article. make it atleast 400 up words`
+            "text": `Generate a news article with the following details:\nDate Issued: ${dateIssued}\nTime Issued: ${timeIssued}\nName of Volcano: ${volcanoName}\nAverage Sulfur Dioxide: ${avgSulfurDioxide} tons\nDate Emission Measure: ${dateEmissionMeasure}\nVolcanic Earthquakes Recorded: ${volcanicEarthquakes}\nSteamed Activity: ${steamActivity}\nAlert Level: ${alertLevel}\nOther Volcanic Activities: ${otherActivities}\nRecommended Actions: ${recommendedActions}\nSource: ${source}\n\nPlease generate a well-structured article in paragraph form only, without asterisks, and with proper punctuation and grammar. The output should have the following structure:\n\n[Title]\n[Location and Date]\n\n[Article]\n\nEnsure that no asterisks are used in the article.`
           }
         ]
       }
     ]
   };
   
-  const apiUrl = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent'; //api keys to wag nyo ibigay kanino kasi account ko to huhu
-  const apiKey = 'AIzaSyDcAhnT84DLBlxuWIFhWvath4DqsUAzI9E'; //ito reason bakit nakaka connect sa api ni gemini ai
+  const apiUrl = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent';
+  const apiKey = 'AIzaSyDcAhnT84DLBlxuWIFhWvath4DqsUAzI9E';
   
   fetch(apiUrl + '?key=' + apiKey, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify(data) //dito pinapasok yung mga data na tig input tas ibibigay papunta kay ai na naka json
-  }) 
+    body: JSON.stringify(data)
+  })
   .then(response => {
     if (!response.ok) {
-      throw new Error('API request failed'); //if nag ka error example pag nag generate ka ito lumabas meaning may error sa pag fetch ng data
+      throw new Error('API request failed');
     }
     return response.json();
   })
-  .then(result => { //ito na yung output pumasok sa for loop para mabigyan sya ng structure tulad sa alignment ng articles
+  .then(result => {
     console.log(result); // Log the entire result to understand its structure
     if (result && result.candidates && result.candidates.length > 0) {
       const candidate = result.candidates[0];

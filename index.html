@@ -6,23 +6,44 @@
 </head>
 <body>
   <h1>Volcanic Eruption News Generator</h1>
-  <form id="eruption-form"> //sa form to 
-    <label for="volcano-name">Volcano Name:</label>
-    <input type="text" id="volcano-name" name="volcano-name" required> //pag nag type masisave sya sa id na volcano-name
+  <form id="eruption-form">
+    <label for="date-issued">Date Issued:</label>
+    <input type="date" id="date-issued" name="date-issued" required>
     
-    <label for="location">Location:</label>
-    <input type="text" id="location" name="location" required>//same here
+    <label for="time-issued">Time Issued:</label>
+    <input type="time" id="time-issued" name="time-issued" required>
     
-    <label for="date">Date:</label>
-    <input type="date" id="date" name="date" required>//same here
+    <label for="volcano-name">Name of Volcano:</label>
+    <input type="text" id="volcano-name" name="volcano-name" required>
     
-    <label for="description">Description:</label>
-    <textarea id="description" name="description" required></textarea>//same here
+    <label for="avg-sulfur-dioxide">Average Sulfur Dioxide (SO2):</label>
+    <input type="number" id="avg-sulfur-dioxide" name="avg-sulfur-dioxide" required>
+    
+    <label for="date-emission-measure">Date Emission Measured:</label>
+    <input type="date" id="date-emission-measure" name="date-emission-measure" required>
+    
+    <label for="volcanic-earthquakes">Volcanic Earthquakes Recorded:</label>
+    <input type="number" id="volcanic-earthquakes" name="volcanic-earthquakes" required>
+    
+    <label for="steam-activity">Steamed Activity:</label>
+    <input type="text" id="steam-activity" name="steam-activity" required>
+    
+    <label for="alert-level">Alert Level:</label>
+    <input type="text" id="alert-level" name="alert-level" required>
+    
+    <label for="other-activities">Other Volcanic Activities:</label>
+    <textarea id="other-activities" name="other-activities" required></textarea>
+    
+    <label for="recommended-actions">Recommended Actions:</label>
+    <textarea id="recommended-actions" name="recommended-actions" required></textarea>
+    
+    <label for="source">Source:</label>
+    <input type="text" id="source" name="source" required>
     
     <button type="submit">Generate News Article</button>
   </form>
   
-  <div id="generated-article"></div> //ito yung field kung saan nakukuha yung article
+  <div id="generated-article"></div>
   
   <script src="script.js"></script>
 </body>
