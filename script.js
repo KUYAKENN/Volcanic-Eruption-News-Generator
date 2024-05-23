@@ -1,30 +1,80 @@
 document.getElementById('eruption-form').addEventListener('submit', function(e) {
   e.preventDefault();
-  
-  const dateIssued = document.getElementById('date-issued').value;
-  const timeIssued = document.getElementById('time-issued').value;
-  const volcanoName = document.getElementById('volcano-name').value;
-  const avgSulfurDioxide = document.getElementById('avg-sulfur-dioxide').value;
-  const dateEmissionMeasure = document.getElementById('date-emission-measure').value;
-  const volcanicEarthquakes = document.getElementById('volcanic-earthquakes').value;
-  const steamActivity = document.getElementById('steam-activity').value;
-  const alertLevel = document.getElementById('alert-level').value;
-  const otherActivities = document.getElementById('other-activities').value;
-  const recommendedActions = document.getElementById('recommended-actions').value;
-  const source = document.getElementById('source').value;
-  
+
+  const requiredFields = [
+    'volcano-name',
+    'date-issued',
+    'other-activities'
+  ];
+
+  const optionalFields = [
+    'time-issued',
+    'avg-sulfur-dioxide',
+    'date-emission-measure',
+    'volcanic-earthquakes',
+    'steam-activity',
+    'alert-level',
+    'recommended-actions',
+    'source'
+  ];
+
+  const fieldValues = {};
+  let isRequiredFieldEmpty = false;
+
+  // Check required fields
+  requiredFields.forEach(field => {
+    const value = document.getElementById(field).value.trim();
+    fieldValues[field] = value;
+    if (!value) {
+      isRequiredFieldEmpty = true;
+    }
+  });
+
+  if (isRequiredFieldEmpty) {
+    alert('Please fill out the required fields: Name of Volcano, Date Issued, and Other Volcanic Activities.');
+    return;
+  }
+
+  // Collect optional fields
+  optionalFields.forEach(field => {
+    const value = document.getElementById(field).value.trim();
+    fieldValues[field] = value;
+  });
+
   const data = {
     "contents": [
       {
         "parts": [
           {
-            "text": `Generate a news article with the following details:\nDate Issued: ${dateIssued}\nTime Issued: ${timeIssued}\nName of Volcano: ${volcanoName}\nAverage Sulfur Dioxide: ${avgSulfurDioxide} tons\nDate Emission Measure: ${dateEmissionMeasure}\nVolcanic Earthquakes Recorded: ${volcanicEarthquakes}\nSteamed Activity: ${steamActivity}\nAlert Level: ${alertLevel}\nOther Volcanic Activities: ${otherActivities}\nRecommended Actions: ${recommendedActions}\nSource: ${source}\n\nPlease generate a well-structured article in paragraph form only, without asterisks, and with proper punctuation and grammar. The output should have the following structure:\n\n[Title]\n[Location and Date]\n\n[Article]\n\nEnsure that no asterisks are used in the article.`
+            "text": `Generate a news article with the following details:\n${
+              fieldValues['date-issued'] ? `Date Issued: ${fieldValues['date-issued']}\n` : ''
+            }${
+              fieldValues['time-issued'] ? `Time Issued: ${fieldValues['time-issued']}\n` : ''
+            }${
+              fieldValues['volcano-name'] ? `Name of Volcano: ${fieldValues['volcano-name']}\n` : ''
+            }${
+              fieldValues['avg-sulfur-dioxide'] ? `Average Sulfur Dioxide: ${fieldValues['avg-sulfur-dioxide']} tons\n` : ''
+            }${
+              fieldValues['date-emission-measure'] ? `Date Emission Measure: ${fieldValues['date-emission-measure']}\n` : ''
+            }${
+              fieldValues['volcanic-earthquakes'] ? `Volcanic Earthquakes Recorded: ${fieldValues['volcanic-earthquakes']}\n` : ''
+            }${
+              fieldValues['steam-activity'] ? `Steamed Activity: ${fieldValues['steam-activity']}\n` : ''
+            }${
+              fieldValues['alert-level'] ? `Alert Level: ${fieldValues['alert-level']}\n` : ''
+            }${
+              fieldValues['other-activities'] ? `Other Volcanic Activities: ${fieldValues['other-activities']}\n` : ''
+            }${
+              fieldValues['recommended-actions'] ? `Recommended Actions: ${fieldValues['recommended-actions']}\n` : ''
+            }${
+              fieldValues['source'] ? `Source: ${fieldValues['source']}\n` : ''
+            }\nPlease generate a well-structured article in paragraph form only, without asterisks, and with proper punctuation and grammar. The output should have the following structure:\n\n[Title]\n[Location and Date]\n\n[Article]\n\nEnsure that no asterisks are used in the article.`
           }
         ]
       }
     ]
   };
-  
+
   const apiUrl = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent';
   const apiKey = 'AIzaSyDcAhnT84DLBlxuWIFhWvath4DqsUAzI9E';
   
