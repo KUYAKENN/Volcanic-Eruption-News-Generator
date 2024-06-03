@@ -136,4 +136,3 @@ document.getElementById('eruption-form').addEventListener('submit', function(e) 
     document.getElementById('generated-article').innerHTML = 'An error occurred while generating the article.';
   });
 });
-
